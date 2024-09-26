@@ -1,2 +1,4 @@
 #忽略 a.out
 a.out
+*.dump
+*.json
