@@ -2,3 +2,5 @@
 a.out
 *.dump
 *.json
+*.26120
+*.pyc
