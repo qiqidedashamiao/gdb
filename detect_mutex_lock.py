@@ -5,7 +5,7 @@
 import os
 import re
 import sys
-import gdb
+# import gdb
 # 添加当前目录到模块搜索路径
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from tool import run_command
