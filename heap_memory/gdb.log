@@ -1,0 +1,55 @@
+[22:16:11:236]Thread 1 "sonia" hit Breakpoint 2, zl_malloc (ptr=0x26d83f8, size=4) at preload.cpp:99
+[22:16:11:237]99      {
+[22:16:11:238]#0  zl_malloc (ptr=0x26d83f8, size=4) at preload.cpp:99
+[22:16:11:258]#1  0xb6fd7d70 in malloc (size=4) at preload.cpp:121
+[22:16:11:260]#2  0xb6916736 in operator new(unsigned int) () from /home/234646/compile/lib/libstdc++.so.6
+[22:16:11:317]#3  0x00575256 in Dahua::Infra::CTimerManager::instance () at Src/Infra3/Timer.cpp:320
+[22:16:11:445]#4  0x0057537c in Dahua::Infra::CTimer::CTimer (this=0x26d8360, pName=0x1aaa460 "MemoryUsage") at Src/Infra3/Timer.cpp:82
+[22:16:11:502]
+[22:16:11:630]Thread 1 "sonia" hit Breakpoint 2, zl_malloc (ptr=0x26d8408, size=24) at preload.cpp:99
+[22:16:11:632]99      {
+[22:16:11:634]#0  zl_malloc (ptr=0x26d8408, size=24) at preload.cpp:99
+[22:16:11:708]#1  0xb6fd7d70 in malloc (size=24) at preload.cpp:121
+[22:16:11:710]#2  0xb6916736 in operator new(unsigned int) () from /home/234646/compile/lib/libstdc++.so.6
+[22:16:11:874]#3  0x0057d74a in Dahua::Infra::CMutex::CMutex (this=0x2477b94 <(anonymous namespace)::getPrintProcMutex()::s_infraProcPrintMutex>) at Src/Infra3/Mutex.cpp:85
+[22:16:11:875]#4  0x005798a2 in (anonymous namespace)::getPrintProcMutex () at Src/Infra3/PrintLog.cpp:60
+[22:16:11:988]
+[22:16:12:117]Thread 1 "sonia" hit Breakpoint 2, zl_malloc (ptr=0x26d8428, size=28) at preload.cpp:99
+[22:16:12:118]99      {
+[22:16:12:121]#0  zl_malloc (ptr=0x26d8428, size=28) at preload.cpp:99
+[22:16:12:196]#1  0xb6fd7d70 in malloc (size=28) at preload.cpp:121
+[22:16:12:200]#2  0xb6916736 in operator new(unsigned int) () from /home/234646/compile/lib/libstdc++.so.6
+[22:16:12:314]#3  0x0057a092 in __gnu_cxx::new_allocator<std::_List_node<Dahua::Infra::TFunction1<bool, char const*> > >::allocate (__n=1, this=this@entry=0xbefffa50)
+[22:16:12:315]    at /opt/arm-AX620E-linux-uclibcgnueabihf/arm-AX620E-linux-uclibcgnueabihf/include/c++/8.3.0/ext/new_allocator.h:99
+[22:16:12:316]#4  std::allocator_traits<std::allocator<std::_List_node<Dahua::Infra::TFunction1<bool, char const*> > > >::allocate (__a=..., __n=1)
+[22:16:12:316]    at /opt/arm-AX620E-linux-uclibcgnueabihf/arm-AX620E-linux-uclibcgnueabihf/include/c++/8.3.0/bits/alloc_traits.h:436
+[22:16:12:368]
+[22:16:12:495]Thread 1 "sonia" hit Breakpoint 2, zl_malloc (ptr=0x26d8448, size=24) at preload.cpp:99
+[22:16:12:496]99      {
+[22:16:12:497]#0  zl_malloc (ptr=0x26d8448, size=24) at preload.cpp:99
+[22:16:12:561]#1  0xb6fd7d70 in malloc (size=24) at preload.cpp:121
+[22:16:12:564]#2  0xb6916736 in operator new(unsigned int) () from /home/234646/compile/lib/libstdc++.so.6
+[22:16:12:683]#3  0x0057d74a in Dahua::Infra::CMutex::CMutex (this=0x2477b84 <(anonymous namespace)::getPrintLogMutex()::s_writeLog_Mutex>) at Src/Infra3/Mutex.cpp:85
+[22:16:12:685]#4  0x0057991a in (anonymous namespace)::getPrintLogMutex () at Src/Infra3/PrintLog.cpp:66
+[22:16:16:714]
+[22:16:16:715]Thread 1 "sonia" hit Breakpoint 3, zl_free (ptr=0x26d2f68, size=1280) at preload.cpp:104
+[22:16:16:715]104     {
+[22:16:16:716]
+[22:16:16:717]Thread 1 "sonia" hit Breakpoint 2, zl_malloc (ptr=0x26d8468, size=1601) at preload.cpp:99
+[22:16:16:718]99      {
+[22:16:16:719]#0  zl_malloc (ptr=0x26d8468, size=1601) at preload.cpp:99
+[22:16:16:719]#1  0xb6fd7d70 in malloc (size=1601) at preload.cpp:121
+[22:16:16:720]#2  0xb6859bb2 in realloc () from /home/234646/compile/lib/libc.so.0
+[22:16:16:720]#3  0xb6fd7f4e in realloc (ptr=0x26d2f68, size=1600) at preload.cpp:194
+[22:16:16:721]#4  0xb685c8e4 in ?? () from /home/234646/compile/lib/libc.so.0
+[22:16:16:722]Backtrace stopped: previous frame identical to this frame (corrupt stack?)
+[22:16:16:722]
+[22:16:16:723]Thread 1 "sonia" hit Breakpoint 3, zl_free (ptr=0x26d2f68, size=1280) at preload.cpp:104
+[22:16:16:723]104     {
+[22:16:16:724]
+[22:16:16:725]Thread 1 "sonia" hit Breakpoint 2, zl_malloc (ptr=0x26d8468, size=1600) at preload.cpp:99
+[22:16:16:725]99      {
+[22:16:16:725]#0  zl_malloc (ptr=0x26d8468, size=1600) at preload.cpp:99
+[22:16:16:726]#1  0xb6fd7f80 in realloc (ptr=0x26d2f68, size=1600) at preload.cpp:204
+[22:16:16:726]#2  0xb685c8e4 in ?? () from /home/234646/compile/lib/libc.so.0
+[22:16:16:727]Backtrace stopped: previous frame identical to this frame (corrupt stack?)
