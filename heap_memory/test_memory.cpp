@@ -44,6 +44,7 @@ void allocateAndFreeMemory(int threadId) {
     std::random_device rd;  // 用于生成随机种子
     std::default_random_engine eng(rd());
     std::uniform_int_distribution<int> distr(1, 10000); // 生成1到100之间的随机数
+    const int step = 1;
     while (running) {
         // 随机分配内存大小
         //int size = std::rand() + 1; // 分配1到1024字节的内存
@@ -62,7 +63,7 @@ void allocateAndFreeMemory(int threadId) {
             //foo();
 
             // 模拟一些处理时间
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            std::this_thread::sleep_for(std::chrono::milliseconds(1*step));
 
             std::cout << "线程 " << gettid() << " new[]开始释放内存" << std::endl;
             // 释放内存
@@ -79,7 +80,7 @@ void allocateAndFreeMemory(int threadId) {
             //foo();
 
             // 模拟一些处理时间
-            std::this_thread::sleep_for(std::chrono::milliseconds(4000));
+            std::this_thread::sleep_for(std::chrono::milliseconds(4*step));
 
             std::cout << "线程 " << gettid() << " malloc开始释放内存" << std::endl;
             // 释放内存
@@ -96,7 +97,7 @@ void allocateAndFreeMemory(int threadId) {
             //foo();
 
             // 模拟一些处理时间
-            std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+            std::this_thread::sleep_for(std::chrono::milliseconds(5*step));
 
             std::cout << "线程 " << gettid() << " calloc开始释放内存" << std::endl;
             // 释放内存
@@ -118,7 +119,7 @@ void allocateAndFreeMemory(int threadId) {
             //foo();
 
             // 模拟一些处理时间
-            std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+            std::this_thread::sleep_for(std::chrono::milliseconds(10*step));
 
             std::cout << "线程 " << gettid() << " realloc开始释放内存" << std::endl;
             // 释放内存
@@ -136,7 +137,7 @@ void allocateAndFreeMemory(int threadId) {
             //foo();
 
             // 模拟一些处理时间
-            std::this_thread::sleep_for(std::chrono::milliseconds(6000));
+            std::this_thread::sleep_for(std::chrono::milliseconds(6*step));
 
             std::cout << "线程 " << gettid() << " new开始释放内存" << std::endl;
             // 释放内存
@@ -145,7 +146,7 @@ void allocateAndFreeMemory(int threadId) {
         std::cout << "线程 " << gettid() << " 释放了内存" << std::endl;
 
         // 模拟一些处理时间
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1*step));
     }
     std::cout << "线程 " << gettid() << " 结束" << std::endl;
 }
@@ -229,7 +230,7 @@ int main(int argc, char** argv) {
     //foo();
     //test();
     //return 0;
-    const int numThreads = 20; // 线程数量
+    const int numThreads = 500; // 线程数量
     std::vector<std::thread> threads;
 
     cout << "[tid:" << gettid() << "]" << "main create thread" << endl;

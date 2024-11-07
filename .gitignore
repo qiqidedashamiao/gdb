@@ -5,3 +5,7 @@ a.out
 *.26120
 *.pyc
 *.core
+memcount*
+sonia
+libpreload.so
+core.2977

@@ -13,7 +13,7 @@ RM	= rm -f
 STRIP = $(CROSS_)strip
 
 #源文件
-SRC = preload.cpp
+SRC = threadstat.cpp
 
 MEMTRACE_SRCPATH = ./Src
 MEMTRACE_LIBPATH = ./
@@ -127,7 +127,7 @@ clean:
 
 test:
 	rm -rf sonia
-	g++ -o sonia test.cpp -ldl $(CFLAGS)
+	g++ -o sonia test_memory.cpp -ldl $(CFLAGS)
 	#$(STRIP) sonia
 
 
