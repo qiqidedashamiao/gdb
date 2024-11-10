@@ -41,7 +41,7 @@ private:
 };
 
 //#define PRINT_FLAG 1
-int8_t g_count_start = 0;
+extern int8_t g_count_start;
 
 char cache[1024*1024*100] = {2,2,3,4,5,6,7,8,9,10};
 // 每个线程执行的函数
@@ -293,12 +293,12 @@ int main(int argc, char** argv) {
 
     // 创建线程
     
-    g_count_start = 1;
+    //g_count_start = 1;
     for (int i = 0; i < numThreads; ++i) {
         threads.push_back(std::thread(allocateAndFreeMemory, i));
     }
     
-    g_count_start = 0;
+    //g_count_start = 0;
     #if PRINT_FLAG
     cout << "[tid:" << gettid() << "]" << "main create thread end" << endl;
     #endif
@@ -308,6 +308,7 @@ int main(int argc, char** argv) {
     cout << "[tid:" << gettid() << "]" << "main create monitor thread end" << endl;
     #endif
 
+    sleep(10);
     // 等待所有线程完成
     for (auto& t : threads) {
         if (t.joinable()) {

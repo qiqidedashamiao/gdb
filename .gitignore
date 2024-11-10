@@ -12,3 +12,6 @@ core.2977
 heap_memory/output/*
 core.*
 memory_alloc*
+*.log
+*.xlsx
+

@@ -30,18 +30,18 @@
 #define gettid() syscall(SYS_gettid)
 #endif
 
+
 // backtrace_symbols()
 // backtrace_symbols_fd()
 
-//#define READPARAM 1
 
 static void initRealMalloc();
 
-#ifdef READPARAM
+// #ifdef READPARAM
 int8_t g_count_start = 0;
-#else
-extern int8_t g_count_start;
-#endif
+// #else
+// extern int8_t g_count_start;
+// #endif
 
 static int8_t sg_count_init = 0;
 
@@ -127,9 +127,9 @@ size_t getMallocSize(void *ptr)
 	size = malloc_usable_size(ptr);
 	return size;
 }
-extern "C" void zl_malloc(void *ptr, size_t size)
+extern "C" void zl_malloc(void *ptr, size_t size, size_t sizereal)
 {
-    Dahua::Count::CCount::insert(ptr, size);
+    Dahua::Count::CCount::insert(ptr, sizereal);
 }
 extern "C" void zl_malloc_b(void *ptr, size_t size)
 {
@@ -145,7 +145,8 @@ extern "C" void zl_malloc_b(void *ptr, size_t size)
             Dahua::Count::CCount::instance()->start();
             sg_count_init = 1;
         }
-        zl_malloc(ptr, size);
+		size_t sizereal = ((*(size_t*)((unsigned char*)ptr - sizeof(size_t))) & (~MEMFLAG));
+        zl_malloc(ptr, size, sizereal);
         
     }
 }

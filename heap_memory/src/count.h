@@ -19,12 +19,15 @@
 #endif
 
 #define THREAD_NAME 1
+#define READPARAM 1
+#define MEMFLAG 0x7
+
 
 namespace Dahua{
 namespace Count{
 
 ///#define MINSIZE (0)
-#define MEMFLAG 0x7
+
 #define SIZE 20
 
 
@@ -56,7 +59,7 @@ public:
 	static void insert(void *key, size_t value)
 	{
 		///size_t realValue = (value + 2*sizeof(size_t) - 1) & ~(2 * sizeof(size_t) - 1);
-		value = ((*(size_t*)((unsigned char*)key - sizeof(size_t))) & (~MEMFLAG));
+		//value = ((*(size_t*)((unsigned char*)key - sizeof(size_t))) & (~MEMFLAG));
 	    if (sm_minSize != 0 && value < sm_minSize)
 		{
 	        return;

@@ -19,7 +19,7 @@ namespace Count{
 	size_t CCount::sm_focSize = 0;
 	pthread_t CCount::sm_tid = 0;
 	int	CCount::sm_period = 30;    			// 30s
-	int	CCount::sm_periodParam = 10000000;  // 10s
+	int	CCount::sm_periodParam = 1000000;  // 10s
 	bool CCount::sm_bStart = false;
 	// std::string CCount::sm_path = "/share";
 	//std::string CCount::sm_paramPath = "/share/memParam";
