@@ -26,16 +26,22 @@ std::mutex cv_m;
 class A {
 public:
     A() {
+        #if PRINT_FLAG
         std::cout << "A()" << std::endl;
+        #endif
     }
     ~A() {
+        #if PRINT_FLAG
         std::cout << "~A()" << std::endl;
+        #endif
     }
 private:
     int a[1000];
 
 };
 
+//#define PRINT_FLAG 1
+int8_t g_count_start = 0;
 
 char cache[1024*1024*100] = {2,2,3,4,5,6,7,8,9,10};
 // 每个线程执行的函数
@@ -44,18 +50,22 @@ void allocateAndFreeMemory(int threadId) {
     std::random_device rd;  // 用于生成随机种子
     std::default_random_engine eng(rd());
     std::uniform_int_distribution<int> distr(1, 10000); // 生成1到100之间的随机数
-    const int step = 1;
+    const int step = 10;
     while (running) {
         // 随机分配内存大小
         //int size = std::rand() + 1; // 分配1到1024字节的内存
         //int size = 1024; // 分配1到1024字节的内存
         int size = distr(eng); // 分配1到100KB之间的内存
+        #if PRINT_FLAG
         std::cout << "线程 " << gettid() << " 申请 " << size << " 字节内存" << std::endl;
+        #endif
         int circle = 5;
         if (size % circle == 0)
         {
             char* buffer = new char[size];
+            #if PRINT_FLAG
             std::cout << "线程 " << gettid() << " new[]分配了 " << size << " 字节内存" << std::endl;
+            #endif
 
             for (int i = 0; i < size; i++) {
                 buffer[i] = i;
@@ -64,15 +74,18 @@ void allocateAndFreeMemory(int threadId) {
 
             // 模拟一些处理时间
             std::this_thread::sleep_for(std::chrono::milliseconds(1*step));
-
+            #if PRINT_FLAG
             std::cout << "线程 " << gettid() << " new[]开始释放内存" << std::endl;
+            #endif
             // 释放内存
             delete[] buffer;
         }
         else if (size % circle == 1)
         {
             char* buffer = (char *)malloc(size);
+            #if PRINT_FLAG
             std::cout << "线程 " << gettid() << " malloc分配了 " << size << " 字节内存" << std::endl;
+            #endif
 
             for (int i = 0; i < size; i++) {
                 buffer[i] = i;
@@ -81,15 +94,18 @@ void allocateAndFreeMemory(int threadId) {
 
             // 模拟一些处理时间
             std::this_thread::sleep_for(std::chrono::milliseconds(4*step));
-
+            #if PRINT_FLAG
             std::cout << "线程 " << gettid() << " malloc开始释放内存" << std::endl;
+            #endif
             // 释放内存
             free(buffer);
         }
         else if (size % circle == 2)
         {
             char* buffer = (char *)calloc(1, size);
+            #if PRINT_FLAG
             std::cout << "线程 " << gettid() << " calloc分配了 " << size << " 字节内存" << std::endl;
+            #endif
 
             for (int i = 0; i < size; i++) {
                 buffer[i] = i;
@@ -98,16 +114,19 @@ void allocateAndFreeMemory(int threadId) {
 
             // 模拟一些处理时间
             std::this_thread::sleep_for(std::chrono::milliseconds(5*step));
+            #if PRINT_FLAG
 
             std::cout << "线程 " << gettid() << " calloc开始释放内存" << std::endl;
+            #endif
             // 释放内存
             free(buffer);
         }
         else if (size % circle == 3)
         {
             char* buffer = (char *)malloc(size);
+            #if PRINT_FLAG
             std::cout << "线程 " << gettid() << " realloc分配了 " << size << " 字节内存" << std::endl;
-
+            #endif
             for (int i = 0; i < size; i++) {
                 buffer[i] = i;
             }
@@ -115,13 +134,17 @@ void allocateAndFreeMemory(int threadId) {
             for (int i = size; i < size + size/2; i++) {
                 buffer[i] = i;
             }
+            #if PRINT_FLAG
             std::cout << "线程 " << gettid() << " realloc重新分配了 " << size+size/2 << " 字节内存" << std::endl;
+            #endif
+
             //foo();
 
             // 模拟一些处理时间
             std::this_thread::sleep_for(std::chrono::milliseconds(10*step));
-
+            #if PRINT_FLAG
             std::cout << "线程 " << gettid() << " realloc开始释放内存" << std::endl;
+            #endif
             // 释放内存
             free(buffer);
         }
@@ -129,7 +152,9 @@ void allocateAndFreeMemory(int threadId) {
         {
             A* buffer = new A();
             size = sizeof(A);
+            #if PRINT_FLAG
             std::cout << "线程 " << gettid() << " new分配了 " << size << " 字节内存" << std::endl;
+            #endif
 
             // for (int i = 0; i < size; i++) {
             //     buffer[i] = i;
@@ -138,17 +163,23 @@ void allocateAndFreeMemory(int threadId) {
 
             // 模拟一些处理时间
             std::this_thread::sleep_for(std::chrono::milliseconds(6*step));
+            #if PRINT_FLAG
 
             std::cout << "线程 " << gettid() << " new开始释放内存" << std::endl;
+            #endif
             // 释放内存
             delete buffer;
         }
+        #if PRINT_FLAG
         std::cout << "线程 " << gettid() << " 释放了内存" << std::endl;
+        #endif
 
         // 模拟一些处理时间
         std::this_thread::sleep_for(std::chrono::milliseconds(1*step));
     }
+    #if PRINT_FLAG
     std::cout << "线程 " << gettid() << " 结束" << std::endl;
+    #endif
 }
 
 void printSymbol(void* address) {
@@ -225,15 +256,17 @@ void test() {
 
 int main(int argc, char** argv) {
 
-
+    #if PRINT_FLAG
     cout << "[tid:" << gettid() << "]" << "main start" << endl;
+    #endif
     //foo();
     //test();
     //return 0;
     const int numThreads = 500; // 线程数量
     std::vector<std::thread> threads;
-
+    #if PRINT_FLAG
     cout << "[tid:" << gettid() << "]" << "main create thread" << endl;
+    #endif
 
     // cout << "请输入数字：0：结束 1：不结束" << endl;
 
@@ -259,15 +292,21 @@ int main(int argc, char** argv) {
     // }
 
     // 创建线程
+    
+    g_count_start = 1;
     for (int i = 0; i < numThreads; ++i) {
         threads.push_back(std::thread(allocateAndFreeMemory, i));
     }
     
+    g_count_start = 0;
+    #if PRINT_FLAG
     cout << "[tid:" << gettid() << "]" << "main create thread end" << endl;
+    #endif
     // 创建监控输入的线程
     std::thread inputThread(monitorInput);
-    
+    #if PRINT_FLAG
     cout << "[tid:" << gettid() << "]" << "main create monitor thread end" << endl;
+    #endif
 
     // 等待所有线程完成
     for (auto& t : threads) {

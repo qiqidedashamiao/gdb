@@ -50,11 +50,14 @@ with open('gdb.log', 'r') as file:
         addrMap[addr] = info
     print(addrMap)
 
+    sum = 0
     # 将addrMap表里的数据写入ws中
     for addr, info in addrMap.items():
         # print(addr)
         # print(info)
         # ws.append([info["size"], info["stack"]])
+        size = int(info["size"])
+        sum += size
         row = [info["size"], info["stack"]]
         ws.append(row)
         # 获取最后一行的单元格
@@ -63,6 +66,7 @@ with open('gdb.log', 'r') as file:
         cell.alignment = Alignment(wrap_text=True)
     # 保存 Excel 文件
     wb.save("memory_allocations.xlsx")
+    print(sum)
 
 
 

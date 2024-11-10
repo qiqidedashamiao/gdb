@@ -12,13 +12,15 @@ AR  = $(CROSS_)ar
 RM	= rm -f
 STRIP = $(CROSS_)strip
 
-#源文件
-SRC = threadstat.cpp
 
-MEMTRACE_SRCPATH = ./Src
+MEMTRACE_SRCPATH = ./src
 MEMTRACE_LIBPATH = ./
 OBJ_PATH = ./Obj
 BIN_PATH = ./
+
+#源文件
+# SRC = threadstat.cpp
+SRC = $(wildcard $(MEMTRACE_SRCPATH)/*.cpp)
 
 #CFLAGS += -I./Include 
 CFLAGS += -Wall -g --std=c++11
