@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+import os
 import subprocess
+import sys
 # import gdb
-from tool import read_output, run_command, set_gdb_params
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(current_dir)
+from tool import read_output, run_command, set_gdb_params, read_output_start
 
 # # python 启动gdb接口
 # # Start the gdb process core dump
@@ -13,9 +17,10 @@ from tool import read_output, run_command, set_gdb_params
 #     return gdb_process
 
 
-def start_gdb_core(gdb_path, exe_path, core_file_path):
+def start_gdb_core(gdb_path, exe_path, core_file_path, show=True):
     gdb_process = subprocess.Popen([gdb_path, exe_path, core_file_path], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    output = read_output(gdb_process)
-    print(output)
-    set_gdb_params(gdb_process)
+    output = read_output_start(gdb_process)
+    if show:
+        print(output)
+    set_gdb_params(gdb_process, show)
     return gdb_process
